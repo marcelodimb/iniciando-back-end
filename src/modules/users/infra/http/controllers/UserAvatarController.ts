@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-
-import UserMap from '@modules/users/mappers/UserMap';
+import { classToClass } from 'class-transformer';
 
 import UpdateUserAvatarService from '@modules/users/services/updateUserAvatarService';
 
@@ -14,11 +13,6 @@ export default class UserAvatarController {
       avatarFilename: request.file.filename,
     });
 
-    const userMap = UserMap.toDTO(user);
-
-    // delete user.password;
-
-    // return response.json(user);
-    return response.json(userMap);
+    return response.json(classToClass(user));
   }
 }
