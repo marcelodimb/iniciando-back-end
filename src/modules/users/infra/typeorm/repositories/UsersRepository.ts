@@ -48,6 +48,9 @@ class UsersRepository implements IUsersRepository {
   public async create(userData: ICreateUserDTO): Promise<User> {
     const user = this.ormRepository.create(userData);
 
+    // Define uma imagem padrão
+    user.avatar = 'avatar-undefined.png';
+
     await this.ormRepository.save(user);
 
     return user;
